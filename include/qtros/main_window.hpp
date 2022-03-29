@@ -12,7 +12,7 @@
 ** Includes
 *****************************************************************************/
 
-#include <QtWidgets/QMainWindow>
+#include <QMainWindow>
 #include "ui_main_window.h"
 #include "qnode.hpp"
 

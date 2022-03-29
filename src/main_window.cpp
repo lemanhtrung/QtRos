@@ -30,18 +30,18 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
 	: QMainWindow(parent)
 	, qnode(argc,argv)
 {
-	ui.setupUi(this); // Calling this incidentally connects all ui's triggers to on_...() callbacks in this class.
+    ui.setupUi(this); // Calling this incidentally connects all ui's triggers to on_...() callbacks in this class.
     QObject::connect(ui.actionAbout_Qt, SIGNAL(triggered(bool)), qApp, SLOT(aboutQt())); // qApp is a global variable for the application
 
     ReadSettings();
-	setWindowIcon(QIcon(":/images/icon.png"));
-	ui.tab_manager->setCurrentIndex(0); // ensure the first tab is showing - qt-designer should have this already hardwired, but often loses it (settings?).
+    setWindowIcon(QIcon(":/images/icon.png"));
+    ui.tab_manager->setCurrentIndex(0); // ensure the first tab is showing - qt-designer should have this already hardwired, but often loses it (settings?).
     QObject::connect(&qnode, SIGNAL(rosShutdown()), this, SLOT(close()));
 
-	/*********************
-	** Logging
-	**********************/
-	ui.view_logging->setModel(qnode.loggingModel());
+    /*********************
+    ** Logging
+    **********************/
+    ui.view_logging->setModel(qnode.loggingModel());
     QObject::connect(&qnode, SIGNAL(loggingUpdated()), this, SLOT(updateLoggingView()));
 
     /*********************
@@ -59,9 +59,9 @@ MainWindow::~MainWindow() {}
 *****************************************************************************/
 
 void MainWindow::showNoMasterMessage() {
-	QMessageBox msgBox;
-	msgBox.setText("Couldn't find the ros master.");
-	msgBox.exec();
+    QMessageBox msgBox;
+    msgBox.setText("Couldn't find the ros master.");
+    msgBox.exec();
     close();
 }
 
@@ -71,36 +71,36 @@ void MainWindow::showNoMasterMessage() {
  */
 
 void MainWindow::on_button_connect_clicked(bool check ) {
-	if ( ui.checkbox_use_environment->isChecked() ) {
-		if ( !qnode.init() ) {
-			showNoMasterMessage();
-		} else {
-			ui.button_connect->setEnabled(false);
-		}
-	} else {
-		if ( ! qnode.init(ui.line_edit_master->text().toStdString(),
-				   ui.line_edit_host->text().toStdString()) ) {
-			showNoMasterMessage();
-		} else {
-			ui.button_connect->setEnabled(false);
-			ui.line_edit_master->setReadOnly(true);
-			ui.line_edit_host->setReadOnly(true);
-			ui.line_edit_topic->setReadOnly(true);
-		}
-	}
+    if ( ui.checkbox_use_environment->isChecked() ) {
+      if ( !qnode.init() ) {
+        showNoMasterMessage();
+      } else {
+        ui.button_connect->setEnabled(false);
+      }
+    } else {
+      if ( ! qnode.init(ui.line_edit_master->text().toStdString(),
+             ui.line_edit_host->text().toStdString()) ) {
+        showNoMasterMessage();
+      } else {
+        ui.button_connect->setEnabled(false);
+        ui.line_edit_master->setReadOnly(true);
+        ui.line_edit_host->setReadOnly(true);
+        ui.line_edit_topic->setReadOnly(true);
+      }
+    }
 }
 
 
 void MainWindow::on_checkbox_use_environment_stateChanged(int state) {
-	bool enabled;
-	if ( state == 0 ) {
-		enabled = true;
-	} else {
-		enabled = false;
-	}
-	ui.line_edit_master->setEnabled(enabled);
-	ui.line_edit_host->setEnabled(enabled);
-	//ui.line_edit_topic->setEnabled(enabled);
+    bool enabled;
+    if ( state == 0 ) {
+      enabled = true;
+    } else {
+      enabled = false;
+    }
+    ui.line_edit_master->setEnabled(enabled);
+    ui.line_edit_host->setEnabled(enabled);
+    //ui.line_edit_topic->setEnabled(enabled);
 }
 
 /*****************************************************************************
@@ -113,7 +113,7 @@ void MainWindow::on_checkbox_use_environment_stateChanged(int state) {
  * the user can always see the latest log message.
  */
 void MainWindow::updateLoggingView() {
-        ui.view_logging->scrollToBottom();
+    ui.view_logging->scrollToBottom();
 }
 
 /*****************************************************************************
@@ -121,7 +121,7 @@ void MainWindow::updateLoggingView() {
 *****************************************************************************/
 
 void MainWindow::on_actionAbout_triggered() {
-    QMessageBox::about(this, tr("About ..."),tr("<h2>PACKAGE_NAME Test Program 0.10</h2><p>Copyright Yujin Robot</p><p>This package needs an about description.</p>"));
+    QMessageBox::about(this, tr("About ..."),tr("<h2>QtRos</h2><p>Copyright RoyLe</p><p>This package is a qtros package using ROS1 and Qt.</p>"));
 }
 
 /*****************************************************************************
