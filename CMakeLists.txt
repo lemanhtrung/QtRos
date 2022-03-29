@@ -37,7 +37,7 @@ qt5_wrap_ui(UIS_HEADERS ui/main_window.ui)
 
 qt5_wrap_cpp(MOC_SOURCES ${CPP_SOURCES} ${CPP_HEADERS})
 
-qt5_add_resources(RESOURCES_RCC ${RESOURCE})
+qt5_add_resources(RESOURCES_RCC ${QRC_RESOURCES})
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS} -std=c++11")
 

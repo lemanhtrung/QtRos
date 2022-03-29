@@ -121,7 +121,7 @@ void MainWindow::updateLoggingView() {
 *****************************************************************************/
 
 void MainWindow::on_actionAbout_triggered() {
-    QMessageBox::about(this, tr("About ..."),tr("<h2>PACKAGE_NAME Test Program 0.10</h2><p>Copyright Yujin Robot</p><p>This package needs an about description.</p>"));
+    QMessageBox::about(this, tr("About ..."),tr("<h2>QTROS</h2><p>Copyright RoyLe</p><p>This package is compilied with Qt5.</p>"));
 }
 
 /*****************************************************************************
